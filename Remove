@@ -1,0 +1,19 @@
+const fs = require('fs');
+const path = require('path');
+
+// use the path module to build the directory path for the Logs folder
+const logsPath = path.join(process.cwd(), 'Logs');
+
+// check if the Logs directory exists
+if (fs.existsSync(logsPath)) {
+    // remove all the files from the Logs directory
+    fs.readdirSync(logsPath).forEach(file => {
+        fs.unlinkSync(path.join(logsPath, file));
+        console.log(`Deleted file: ${file}`);
+    });
+    // remove the Logs directory
+    fs.rmdirSync(logsPath);
+    console.log(`Deleted directory: Logs`);
+} else {
+    console.log(`Directory Logs does not exist.`);
+}
